@@ -37,6 +37,20 @@
     height: 100%;
 }
 
-.loginEmailFields {
-    margin-left: 20%;
+.loginFields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.registerFields {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+}
+
+.cardc {
+    height: 100%;
 }

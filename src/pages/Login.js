@@ -40,10 +40,13 @@ function Login() {
 
     if (email !== "" && validateEmail(email) && password !== "") {
       try {
-        const { error } = await supabase.auth.signIn({ email, password });
+        const { error, user } = await supabase.auth.signIn({ email, password });
+        sessionStorage.setItem("uuid", user.id);
+        localStorage.getItem(supabase.auth.token);
+        // console.log(user.id);
         if (error) throw error;
         alert("logged in");
-        navigate("/home", { replace: false });
+        navigate("/home", { replace: true });
 
         // const data = await login(email, loginPassword);
         // if (data[1] === 200) {
@@ -81,7 +84,7 @@ function Login() {
   };
 
   return (
-    <div className="loginEmailFields">
+    <div className="loginFields">
       <div style={{ marginTop: "10px" }}>
         <FormControl required>
           <InputLabel htmlFor="username">Email</InputLabel>
