@@ -1,0 +1,42 @@
+.card-header {
+    background-color: purple;
+    height: 70px;
+    color: white;
+    padding: 11px;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.empty-field {
+    color: white;
+    background-color: black;
+    text-align: center;
+    width: 180px;
+    height: 30px;
+    padding-top: 10px;
+    border-radius: 7px;
+    margin-left: -10px;
+    margin-top: 5px;
+}
+
+.red {
+    color: red;
+}
+
+.card {
+    height: 100%;
+}
+
+.loginEmailFields {
+    margin-left: 20%;
+}
