@@ -45,13 +45,13 @@ function Login() {
 
         const { data, error2 } = await supabase
           .from("user")
-          .select("firstName, lastName")
+          .select("firstName, lastName,offHoursStart,offHoursEnd")
           .match({ id: user.id });
         localStorage.setItem("FirstName", data[0].firstName);
         localStorage.setItem("LastName", data[0].lastName);
+        localStorage.setItem("OffHoursStart", data[0].offHoursStart);
+        localStorage.setItem("OffHoursEnd", data[0].offHoursEnd);
         if (error2) throw error2;
-
-        // console.log(data);
         alert("logged in");
         navigate("/home", { replace: true });
       } catch (err) {

@@ -8,23 +8,35 @@ import LockResetIcon from "@mui/icons-material/LockReset";
 import Modal from "@mui/material/Modal";
 import ChangeName from "./ChangeName";
 import ChangePassword from "./ChangePassword";
-
+import SetOffHours from "./SetOffHours";
 function Profile() {
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [openForEmailChange, setOpenForEmailChange] = useState(false);
   const [openForPasswordChange, setOpenForPasswordChange] = useState(false);
+  const [openForSetOffHours, setOpenForSetOffHours] = useState(false);
+
+  const [offHoursStart, setOffHoursStart] = useState("");
+  const [offHoursEnd, setOffHoursEnd] = useState("");
 
   const handleOpenChangeEmail = () => setOpenForEmailChange(true);
   const handleCloseChangeEmail = () => setOpenForEmailChange(false);
   const handleOpenChangePassword = () => setOpenForPasswordChange(true);
   const handleCloseChangePassword = () => setOpenForPasswordChange(false);
+  const handleOpenSetOffHours = () => setOpenForSetOffHours(true);
+  const handleCloseSetOffHours = () => setOpenForSetOffHours(false);
 
   useEffect(() => {
     let tempFirstName = localStorage.getItem("FirstName");
     let tempLastName = localStorage.getItem("LastName");
+    let tempOffHoursStart = localStorage.getItem("OffHoursStart");
+    let tempOffHoursEnd = localStorage.getItem("OffHoursEnd");
     setFirstname(tempFirstName);
     setLastname(tempLastName);
+    setOffHoursStart(tempOffHoursStart);
+    setOffHoursEnd(tempOffHoursEnd);
+
+    async function fetchUser() {}
   }, []);
   return (
     <div>
@@ -66,6 +78,42 @@ function Profile() {
             </Button>
           </div>
         </div>
+
+        {/* Extra Buttons */}
+        <div className="paper-divs">
+          <div className="x-large left">
+            Off Hours :{" "}
+            {offHoursStart === "null" ? (
+              "Not Set"
+            ) : offHoursStart < 13 ? (
+              <span>{offHoursStart} am</span>
+            ) : (
+              <span>{offHoursStart % 12} pm</span>
+            )}
+            {offHoursStart === "null" ? "" : " to "}
+            {offHoursEnd === "null" ? (
+              ""
+            ) : offHoursEnd < 13 ? (
+              <span>{offHoursEnd} am</span>
+            ) : (
+              <span>{offHoursEnd % 12} pm</span>
+            )}
+          </div>
+        </div>
+        <div className="paper-divs">
+          <div className="left">
+            <Button
+              style={{
+                width: "40%",
+              }}
+              color="primary"
+              variant="contained"
+              onClick={() => handleOpenSetOffHours()}
+            >
+              Set Off Hours
+            </Button>
+          </div>
+        </div>
       </Paper>
       <Modal
         open={openForEmailChange}
@@ -85,6 +133,16 @@ function Profile() {
       >
         <div>
           <ChangePassword />
+        </div>
+      </Modal>
+      <Modal
+        open={openForSetOffHours}
+        onClose={handleCloseSetOffHours}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div>
+          <SetOffHours />
         </div>
       </Modal>
     </div>

@@ -37,12 +37,14 @@ function Header(props) {
       <header className="header">
         {
           <div className="label">
-            {props.Profile === true
+            {props.Profile
               ? "Profile"
-              : props.ChangeName === true
+              : props.ChangeName
               ? "Change Name"
-              : props.ChangePassword === true
+              : props.ChangePassword
               ? "Change Password"
+              : props.SetOffHours
+              ? "Set Off Hours"
               : "Make an Appointment"}
           </div>
         }
