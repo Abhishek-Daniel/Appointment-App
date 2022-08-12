@@ -51,7 +51,7 @@ function Login() {
         localStorage.setItem("LastName", data[0].lastName);
         if (error2) throw error2;
 
-        console.log(data);
+        // console.log(data);
         alert("logged in");
         navigate("/home", { replace: true });
       } catch (err) {

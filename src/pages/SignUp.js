@@ -38,7 +38,7 @@ function SignUp(props) {
   const [registerPassword, setRegisterPassword] = useState("");
   const inputRegisterPasswordChangeHandler = (e) => {
     setRegisterPassword(e.target.value);
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setRegisterPasswordRequired("dispNone");
   };
 
@@ -107,7 +107,7 @@ function SignUp(props) {
           email: `${email}`,
           password: `${registerPassword}`,
         });
-        console.log(email, registerPassword);
+        // console.log(email, registerPassword);
         if (error) {
           throw error;
         }

@@ -22,8 +22,8 @@ function ChangePassword() {
 
   const changeNameSubmit = async () => {
     if (
-      !firstPassword === "" &&
-      !secondPassword === "" &&
+      firstPassword !== "" &&
+      secondPassword !== "" &&
       firstPassword === secondPassword
     ) {
       try {

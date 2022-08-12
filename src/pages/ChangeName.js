@@ -25,7 +25,7 @@ function ChangeName() {
   }, []);
 
   const changeNameSubmit = async () => {
-    if (!firstName === "" && !lastName === "") {
+    if (firstName !== "" && lastName !== "") {
       const user = await supabase.auth.user();
 
       try {
@@ -34,6 +34,7 @@ function ChangeName() {
           .update({ firstName: firstName, lastName: lastName })
           .eq("id", user.id);
         if (error) throw error;
+
         localStorage.setItem("FirstName", data[0].firstName);
         localStorage.setItem("LastName", data[0].lastName);
         setDisplayFirstname(firstName);
