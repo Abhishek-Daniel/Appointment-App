@@ -35,8 +35,6 @@ function Profile() {
     setLastname(tempLastName);
     setOffHoursStart(tempOffHoursStart);
     setOffHoursEnd(tempOffHoursEnd);
-
-    async function fetchUser() {}
   }, []);
   return (
     <div>

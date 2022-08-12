@@ -3,23 +3,11 @@ import { supabase } from "../database/Database";
 import Button from "@mui/material/Button";
 import Paper from "@mui/material/Paper";
 import Header from "./Header";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Input from "@mui/material/Input";
 import "./common.css";
 import { useNavigate } from "react-router-dom";
-// import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-// import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import Stack from "@mui/material/Stack";
 import TimePickerUtil from "./TimePickerUtil";
 
 function SetOffHours() {
-  const [displayFirstName, setDisplayFirstname] = useState("");
-  const [displayLastName, setDisplayLastname] = useState("");
-  const [firstNameRequired, setFirstNameRequired] = useState("dispNone");
-  const [lastNameRequired, setLastNameRequired] = useState("dispNone");
-  //   const [firstName, setFirstName] = useState("");
   const [startLessThanEnd, setStartLessThanEnd] = useState("dispNone");
   const [startEqualsEnd, setStartEqualsEnd] = useState("dispNone");
   const [offHoursStart, setOffHoursStart] = useState(
