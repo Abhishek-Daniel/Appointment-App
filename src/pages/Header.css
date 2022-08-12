@@ -1,0 +1,28 @@
+.header {
+    background-color: purple;
+    height: 35px;
+    /* height: 35px; This height matches the screenshot */
+    padding: 11px;
+}
+
+.logo {
+    height: 35px;
+    background: #ff7f7f;
+    float: left;
+}
+
+.label {
+    color: white;
+    display: inline;
+    padding-left: 20px;
+    font-size: x-large;
+    font-family: sans-serif;
+    font-weight: 100;
+    vertical-align: top;
+    line-height: 35px;
+}
+
+.login-button {
+    float: right;
+    /* margin-right: 10px; */
+}

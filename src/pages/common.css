@@ -1,6 +1,6 @@
 .card-header {
     background-color: purple;
-    height: 70px;
+    height: 35px;
     color: white;
     padding: 11px;
 }
@@ -21,12 +21,14 @@
     color: white;
     background-color: black;
     text-align: center;
-    width: 180px;
     height: 30px;
     padding-top: 10px;
     border-radius: 7px;
-    margin-left: -10px;
     margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
 }
 
 .red {
@@ -51,6 +53,73 @@
     align-content: center;
 }
 
-.cardc {
-    height: 100%;
+
+/* Profile */
+
+.large {
+    font-size: large;
+    margin-top: 5px;
+    font-weight: 350;
 }
+
+.select-container {
+    width: 150px;
+    margin: auto;
+}
+
+.select-drop {
+    width: 210px;
+    margin-left: 5px;
+    margin: "auto",
+}
+
+.none-option {
+    opacity: 0;
+}
+
+.paper-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paper {
+    /* cursor: pointer; */
+    /* width: 96%; */
+    height: 100vh;
+    padding: 20px;
+    /* margin: 15px; */
+    /* text-align: left; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    /* align-content: center; */
+}
+
+.paper-divs {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center;
+    align-content: center; */
+    /* display: flex; */
+    /* justify-content: center; */
+}
+
+.left {
+    flex: 0 0 50%;
+    justify-content: end !important;
+}
+
+.right {
+    flex: 1;
+    justify-content: start !important;
+}
+
+.x-large {
+    font-size: x-large;
+    font-weight: 400;
+}
+
+
+/* Modal */

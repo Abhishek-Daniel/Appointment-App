@@ -1,28 +1,39 @@
-import React from "react";
-import { supabase } from "../database/Database";
+import React, { useEffect, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { Card, CardContent } from "@mui/material";
+import "./common.css";
 
 export default function Home() {
+  const [value, setValue] = useState(0);
   const navigate = useNavigate();
-  const check = () => {
-    const v = localStorage.getItem("supabase.auth.token");
-    console.log(v);
-  };
-  const logout = async () => {
-    try {
-      let { error } = await supabase.auth.signOut();
-      if (error) throw error;
-      alert("Logged out");
+
+  useEffect(() => {
+    if (!localStorage.getItem("supabase.auth.token")) {
       navigate("/auth", { replace: true });
-    } catch (err) {
-      alert(err.message);
     }
+  });
+  const tabChangeHandler = (e, val) => {
+    setValue(val);
   };
+
   return (
     <div className="Auth">
-      <p>Home Page</p>
-      <button onClick={check}>Check Data</button>
-      <button onClick={logout}>Logout</button>
+      <Header />
+      <Card className="card">
+        <CardContent style={{ padding: 0 }} className="cardc">
+          <Tabs variant="fullWidth" value={value} onChange={tabChangeHandler}>
+            <Tab label="Schedule" />
+            <Tab label="Appointments" />
+          </Tabs>
+          {value === 0 && <div>Coming Soon !</div>}
+
+          {value === 1 && <div>Coming Soon Too !</div>}
+        </CardContent>
+      </Card>
     </div>
   );
 }

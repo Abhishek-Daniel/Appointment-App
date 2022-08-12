@@ -4,7 +4,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
-// import "./common.css";
 import { supabase } from "../database/Database";
 import { useNavigate } from "react-router-dom";
 
@@ -41,44 +40,28 @@ function Login() {
     if (email !== "" && validateEmail(email) && password !== "") {
       try {
         const { error, user } = await supabase.auth.signIn({ email, password });
-        sessionStorage.setItem("uuid", user.id);
-        localStorage.getItem(supabase.auth.token);
-        // console.log(user.id);
+
         if (error) throw error;
+
+        const { data, error2 } = await supabase
+          .from("user")
+          .select("firstName, lastName")
+          .match({ id: user.id });
+        localStorage.setItem("FirstName", data[0].firstName);
+        localStorage.setItem("LastName", data[0].lastName);
+        if (error2) throw error2;
+
+        console.log(data);
         alert("logged in");
         navigate("/home", { replace: true });
-
-        // const data = await login(email, loginPassword);
-        // if (data[1] === 200) {
-        //   sessionStorage.setItem("uuid", data[0].id);
-        //   sessionStorage.setItem("access-token", data[0].accessToken);
-
-        //   setLoggedIn(
-        //     sessionStorage.getItem("access-token") === null ||
-        //       sessionStorage.getItem("access-token") === undefined
-        //       ? false
-        //       : true
-        //   );
-
-        //   setIsSuccessLogin("dispBlock");
-        //   setIsFailedLogin("dispNone");
-
-        //   setTimeout(() => {
-        //     props.closeModal();
-        //   }, 1000);
-        // } else {
-        //   setLoggedIn(
-        //     sessionStorage.getItem("access-token") === null ||
-        //       sessionStorage.getItem("access-token") === undefined
-        //       ? false
-        //       : true
-        //   );
-        //   setIsSuccessLogin("dispNone");
-        //   setIsFailedLogin("dispBlock");
-        // }
       } catch (err) {
-        // console.log("Backend Not Running");
-        alert(err.message);
+        let e = "Cannot read properties of null (reading 'id')";
+
+        if (err.message.toLowerCase() === e.toLowerCase()) {
+          alert("Invalid Email or Password");
+        } else {
+          alert(err.message);
+        }
       }
     }
   };
@@ -95,7 +78,7 @@ function Login() {
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className={emailRequired}>
-            <div className="empty-field">Please fill out this field.</div>
+            <div className="empty-field ">Please fill out this field.</div>
           </div>
           <FormHelperText className={emailValid}>
             <span className="red">Enter valid Email</span>

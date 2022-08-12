@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import FormHelperText from "@mui/material/FormHelperText";
 import Button from "@mui/material/Button";
 import { supabase } from "../database/Database";
+import { useNavigate } from "react-router-dom";
 
 function SignUp(props) {
   const [email, setEmail] = useState("");
@@ -30,6 +31,7 @@ function SignUp(props) {
     setEmailRequired("dispNone");
     setEmailValid("dispNone");
   };
+  const navigate = useNavigate();
 
   const [registerPasswordRequired, setRegisterPasswordRequired] =
     useState("dispNone");
@@ -43,6 +45,8 @@ function SignUp(props) {
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [isSuccessRegister, setIsSuccessRegister] = useState("dispNone");
   const [isFailedRegister, setIsFailedRegister] = useState("dispNone");
+  const [userCreated, setUserCreated] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const validateEmail = (email) => {
     return String(email)
@@ -51,6 +55,26 @@ function SignUp(props) {
         /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
       );
   };
+
+  useEffect(() => {
+    async function ch() {
+      if (userCreated) {
+        try {
+          const { error } = await supabase
+            .from("user")
+            .insert([
+              { id: userData.id, firstName: firstname, lastName: lastname },
+            ]);
+          if (error) throw error;
+          localStorage.setItem("FirstName", firstname);
+          localStorage.setItem("LastName", lastname);
+        } catch (err) {
+          alert(err.message);
+        }
+      }
+    }
+    ch();
+  }, [userCreated, userData, firstname, lastname]);
 
   const registerClickHandler = async () => {
     firstname === ""
@@ -71,14 +95,6 @@ function SignUp(props) {
       ? setRegisterPasswordRequired("dispBlock")
       : setRegisterPasswordRequired("dispNone");
 
-    // contact === ""
-    //   ? setContactRequired("dispBlock")
-    //   : setContactRequired("dispNone");
-
-    // contact !== "" && !validatePhoneNumber(contact)
-    //   ? setContactValid("dispBlock")
-    //   : setContactValid("dispNone");
-
     if (
       firstname !== "" &&
       lastname !== "" &&
@@ -87,18 +103,23 @@ function SignUp(props) {
       registerPassword !== ""
     ) {
       try {
-        const { error } = await supabase.auth.signUp({
+        const { user, error } = await supabase.auth.signUp({
           email: `${email}`,
           password: `${registerPassword}`,
         });
         console.log(email, registerPassword);
-        if (error) throw error;
+        if (error) {
+          throw error;
+        }
+        setUserData(user);
+        setUserCreated(true);
         setRegistrationSuccess(true);
         setIsSuccessRegister("dispBlock");
         setIsFailedRegister("dispNone");
         alert("signed up");
-        // console.log(props);
-        props.setValue(0);
+        setTimeout(() => {
+          navigate("/");
+        }, 500);
       } catch (err) {
         setRegistrationSuccess(false);
         setIsSuccessRegister("dispNone");

@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import SignUp from "./SignUp";
+import "./common.css";
 
 export default function Auth(props) {
   const [value, setValue] = useState(0);
@@ -26,7 +27,7 @@ export default function Auth(props) {
     <div>
       <Card className="card">
         <CardHeader className="card-header" title="Authentication"></CardHeader>
-        <CardContent className="cardc">
+        <CardContent style={{ padding: 0 }} className="cardc">
           <Tabs variant="fullWidth" value={value} onChange={tabChangeHandler}>
             <Tab label="Login" />
             <Tab label="Register" />
@@ -39,7 +40,6 @@ export default function Auth(props) {
 
           {value === 1 && (
             <div>
-              {/* Signup/Registration screen to be added */}
               <SignUp setValue={setValue} />
             </div>
           )}
