@@ -6,6 +6,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Card, CardContent } from "@mui/material";
 import "./common.css";
+import Schedule from "./Schedule";
+import Appointments from "./Appointments";
 
 export default function Home() {
   const [value, setValue] = useState(0);
@@ -29,7 +31,7 @@ export default function Home() {
             <Tab label="Schedule" />
             <Tab label="Appointments" />
           </Tabs>
-          {value === 0 && <div>Coming Soon !</div>}
+          {value === 0 && <Schedule />}
 
           {value === 1 && <div>Coming Soon Too !</div>}
         </CardContent>
