@@ -53,39 +53,6 @@ function SetOffHours() {
       }
     }
   };
-  //   const changeNameSubmit = async () => {
-  //     if (firstName !== "" && lastName !== "") {
-  //       const user = await supabase.auth.user();
-
-  //       try {
-  //         const { data, error } = await supabase
-  //           .from("user")
-  //           .update({ firstName: firstName, lastName: lastName })
-  //           .eq("id", user.id);
-  //         if (error) throw error;
-
-  //         localStorage.setItem("FirstName", data[0].firstName);
-  //         localStorage.setItem("LastName", data[0].lastName);
-  //         setDisplayFirstname(firstName);
-  //         setDisplayLastname(lastName);
-
-  //         setTimeout(() => {
-  //           alert("Off Hours Set, Navigating to home page");
-  //           navigate("/");
-  //         }, 500);
-  //       } catch (err) {
-  //         alert(err.message);
-  //       }
-  //     } else {
-  //       firstName === ""
-  //         ? setFirstNameRequired("dispBlock")
-  //         : setFirstNameRequired("dispNone");
-
-  //       lastName === ""
-  //         ? setLastNameRequired("dispBlock")
-  //         : setLastNameRequired("dispNone");
-  //     }
-  //   };
 
   return (
     <div>
