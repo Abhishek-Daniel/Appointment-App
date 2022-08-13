@@ -26,7 +26,10 @@ export default function Auth(props) {
   return (
     <div>
       <Card className="card">
-        <CardHeader className="card-header" title="Authentication"></CardHeader>
+        <CardHeader
+          className="card-header"
+          title="Appointment App"
+        ></CardHeader>
         <CardContent style={{ padding: 0 }} className="cardc">
           <Tabs variant="fullWidth" value={value} onChange={tabChangeHandler}>
             <Tab label="Login" />
