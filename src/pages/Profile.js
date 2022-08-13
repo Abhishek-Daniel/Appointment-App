@@ -77,7 +77,6 @@ function Profile() {
           </div>
         </div>
 
-        {/* Extra Buttons */}
         <div className="paper-divs">
           <div className="x-large left">
             Off Hours :{" "}

@@ -46,6 +46,18 @@
     align-content: center;
 }
 
+.paper-container-large {
+    width: 50%;
+}
+
+.appointmentCards {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
 .registerFields {
     display: flex;
     flex-direction: column;
@@ -77,10 +89,23 @@
     opacity: 0;
 }
 
+.paper-container-appointment {
+    padding-left: 50px;
+}
+
+.minHeightApp {
+    min-height: 100px;
+    margin-bottom: 20px;
+}
+
 .paper-container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.minHeight {
+    min-height: fit-content;
 }
 
 .paper {

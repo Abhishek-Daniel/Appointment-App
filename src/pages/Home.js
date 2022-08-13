@@ -33,7 +33,7 @@ export default function Home() {
           </Tabs>
           {value === 0 && <Schedule />}
 
-          {value === 1 && <div>Coming Soon Too !</div>}
+          {value === 1 && <Appointments />}
         </CardContent>
       </Card>
     </div>

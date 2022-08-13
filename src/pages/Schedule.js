@@ -95,7 +95,6 @@ function Schedule() {
         setAppointmentOwnerName(
           ownerName[0].firstName + " " + ownerName[0].lastName
         );
-        // console.log(user);
         let filteredUserList = user.filter(function (item, index, arr) {
           return item.id !== userForArraySplice.id;
         });
@@ -116,8 +115,6 @@ function Schedule() {
       appointmentMonth !== "" &&
       appointmentDate !== ""
     ) {
-      console.log("here");
-      console.log(dateSelected);
       async function fetchAppointments() {
         let tempAllAlignedAppointments = [];
         try {
@@ -143,30 +140,20 @@ function Schedule() {
             OwnerAppointments
           );
 
-          console.log("Step 1===================", guestAppointments);
-          console.log("Step 2===================", OwnerAppointments);
-          console.log("Step 3===================", tempAllAlignedAppointments);
           let timeSlotsNotAvailable = [];
           tempAllAlignedAppointments.forEach((item) => {
             timeSlotsNotAvailable.push(item.time);
           });
 
-          console.log("Step 4===================", timeSlotsNotAvailable);
-
-          console.log(guestOffHoursStart);
-          console.log(guestOffHoursEnd);
           for (let i = guestOffHoursStart; i < guestOffHoursEnd; ++i) {
             timeSlotsNotAvailable.push(i);
           }
 
-          console.log("Step 5===================", timeSlotsNotAvailable);
           let netFilteredTimeSlots = allTimeslotsObject;
-          console.log(netFilteredTimeSlots);
           timeSlotsNotAvailable.forEach((i) => {
             delete netFilteredTimeSlots[`${i}`];
           });
 
-          console.log("Step 6===================", netFilteredTimeSlots);
           setTimeSlots(netFilteredTimeSlots);
         } catch (err) {
           alert(err.message);
@@ -191,7 +178,6 @@ function Schedule() {
             .select("firstName,lastName")
             .eq("id", userIdForAppointment);
           if (error) throw error;
-          console.log("-----------------------", user);
           setAppointmentGuestName(user[0].firstName + " " + user[0].lastName);
         }
         fetchUser();
@@ -199,7 +185,6 @@ function Schedule() {
         alert(err.message);
       }
   }, [userIdForAppointment, appointmentGuestName]);
-  //   console.log(appData);
   const handleChange = (event) => {
     setUserIdForAppointment(event.target.value);
     let userDataForOffHours = usersList.filter(function (item, index, arr) {
@@ -269,6 +254,22 @@ function Schedule() {
           alert(err.message);
         }
       }
+    } else {
+      appointmentTitle === ""
+        ? setAppointmentTitleRequired("dispBlock")
+        : setAppointmentTitleRequired("dispNone");
+
+      appointmentAgenda === ""
+        ? setAppointmentAgendaRequired("dispBlock")
+        : setAppointmentAgendaRequired("dispNone");
+
+      appointmentDate === ""
+        ? setAppointmentDateRequired("dispBlock")
+        : setAppointmentDateRequired("dispNone");
+
+      appointmentTime === ""
+        ? setAppointmentTimeRequired("dispBlock")
+        : setAppointmentTimeRequired("dispNone");
     }
   };
 
@@ -278,7 +279,6 @@ function Schedule() {
         <div className="paper-divs">
           <div className="x-large left">Select Guest</div>
         </div>
-        {/* Guest */}
         <FormControl style={{ marginLeft: "0px" }} sx={{ m: 1, minWidth: 120 }}>
           <InputLabel id="demo-simple-select-helper-label">Guest</InputLabel>
           <Select
@@ -287,9 +287,6 @@ function Schedule() {
             value={userIdForAppointment}
             onChange={handleChange}
           >
-            {/* <MenuItem value="">
-                <em>None</em>
-              </MenuItem> */}
             {usersList.map((i) => {
               return (
                 <MenuItem key={i.created_at} value={i.id}>
@@ -298,15 +295,9 @@ function Schedule() {
               );
             })}
           </Select>
-          {/* <FormHelperText>With label + helper text</FormHelperText> */}
         </FormControl>
 
-        {/* <div style={{ marginTop: "10px" }}> */}
         <div className="paper-divs">
-          {/* <div style={{ marginTop: "10px" }} className="x-large ">
-            Title :
-          </div> */}
-
           {/* Title */}
           <FormControl style={{ marginTop: "10px" }} required>
             <InputLabel style={{ marginLeft: "-11px" }} htmlFor="username">
@@ -343,17 +334,19 @@ function Schedule() {
           </FormControl>
 
           {/* Date */}
-          <div style={{ marginLeft: "10px" }}>
+          <div style={{ marginLeft: "10px", minWidth: "fit-content" }}>
             <DatePickerUtil
               value={dateSelected}
               setValue={selectDateHandler}
               label="Appointment Date"
             />
             <div className={appointmentDateRequired}>
-              Please fill out this field.
+              <div className="empty-field ">Please a select date</div>
             </div>
             <div className={appointmentDateLessThanCurrent}>
-              Appointment date can't be less than current date
+              <div className="empty-field ">
+                Appointment date can't be less than or equal to current date
+              </div>
             </div>
           </div>
 
@@ -371,51 +364,27 @@ function Schedule() {
               value={appointmentTime}
               onChange={selectTimeSlotHandler}
             >
-              {/* <MenuItem value="">
-                <em>None</em>
-              </MenuItem> */}
-
               {Object.keys(timeSlots).map((h) => {
-                // console.log(h);
                 return (
                   <MenuItem key={h} value={h}>
                     {timeSlots[`${h}`]}
                   </MenuItem>
                 );
               })}
-              {/* {allTimeSlots.map((h) => {
-                return Object.keys(h).map((i) => {
-                  //   console.log(h[`${i}`]);
-                  return (
-                    <MenuItem key={i} value={i}>
-                      {h[`${i}`]}
-                    </MenuItem>
-                  );
-                });
-              })} */}
             </Select>
             <div className={appointmentTimeRequired}>
-              Please Select A Time Slot
+              <div
+                style={{
+                  paddingLeft: "10px",
+                  paddingRight: "10px",
+                }}
+                className="empty-field "
+              >
+                Please Select A Time Slot
+              </div>
             </div>
           </FormControl>
-
-          {/* <FormControl style={{ marginLeft: "10px" }} required>
-            <InputLabel style={{ marginLeft: "-11px" }} htmlFor="username">
-              Time
-            </InputLabel>
-            <Input
-              id="email"
-              //   type="text"
-              //   email={email}
-              //   onChange={(e) => setEmail(e.target.value)}
-            />
-            <div className={"dispNone"}>
-              <div className="empty-field ">Please fill out this field.</div>
-            </div>
-          </FormControl> */}
         </div>
-
-        {/* </div> */}
 
         <div style={{ marginTop: "10px" }} className="paper-divs">
           <div className="left">
