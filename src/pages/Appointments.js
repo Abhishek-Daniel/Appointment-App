@@ -47,7 +47,6 @@ function Appointments() {
     }
     fetchAppointmentList();
   }, []);
-
   return (
     <div>
       {!appointmentList[0] && (
@@ -68,8 +67,8 @@ function Appointments() {
       )}
       {appointmentList.map((i) => {
         return (
-          <div className="appointmentCards">
-            <div key={i.id} className="paper-container-large">
+          <div key={i.appointmentid} className="appointmentCards">
+            <div className="paper-container-large">
               <Paper className="paper-large" elevation={3}>
                 <div
                   style={{ marginBottom: "20px" }}
@@ -103,7 +102,6 @@ function Appointments() {
       </Paper>
     </div>
   );
-  herok;
 }
 
 export default Appointments;
